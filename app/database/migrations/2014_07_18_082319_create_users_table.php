@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('active')->default(false);
 			$table->boolean('root')->default(false);
 			$table->rememberToken();
-			$table->timestamp('last_login');
+			$table->timestamp('last_login')->nullable();
 			$table->timestamps();
 		});
 	}
