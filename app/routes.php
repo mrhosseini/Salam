@@ -1,5 +1,10 @@
 <?php
 
+/****************
+ * بسم الله الرحمن الرحیم
+ *
+ ****************/
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,7 +16,16 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('before' => 'auth', function()
 {
 	return View::make('hello');
-});
+}));
+
+Route::get('login', array('before' => 'guest', function(){
+	return View::make('login');
+}));
+
+
+Route::post('login', array('before' => 'guest', function(){
+	return View::make('login');
+}));

@@ -1,4 +1,5 @@
 <?php
+//بسم الله الرحمن الرحیم
 
 class Post extends Eloquent {
 

@@ -1,4 +1,5 @@
 <?php
+//بسم الله الرحمن الرحیم
 
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;

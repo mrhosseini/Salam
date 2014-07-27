@@ -40,3 +40,7 @@
 	</div>
 </body>
 </html>
+
+<?php
+echo Lang::getLocale();
+?>

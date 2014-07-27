@@ -1,4 +1,5 @@
 <?php
+//بسم الله الرحمن الرحیم
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
