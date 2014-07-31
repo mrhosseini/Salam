@@ -26,6 +26,9 @@ Route::get('login', array('before' => 'guest', function(){
 }));
 
 
-Route::post('login', array('before' => 'guest', function(){
-	return View::make('login');
+Route::post('login', array('before' => 'csrf|guest', 'uses' => 'UserController@authenticate'));
+
+Route::get('logout', array('before' => 'auth', function(){
+	Auth::logout();
+	return Redirect::to('login');
 }));
