@@ -9,9 +9,9 @@
 <html>
 <head>
 	<title>{{ trans('messages.login_title'); }}</title>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> FIXME-->
 	{{ HTML::style('css/bootstrap.min.css'); }}
@@ -36,19 +36,19 @@
 				</div>
 				<div class="row text-center" style="padding-bottom: 10px;"><h2>{{ trans('messages.login_title'); }}</h2></div>
 				<form id="loginForm" class="form-horizontal well" method="post" action="./login" >
-						<div class="row form-group">
-							<label class="col-md-4 control-label" for="email">{{ trans('messages.email'); }}:</label>
-							<div class="col-md-8"><input class="form-control" type="text" name="email" id="email" placeholder="{{ trans('messages.email'); }}" /></div>
-						</div>			
-						<div class="row form-group">
-							<label class="col-md-4 control-label" for="password">{{ trans('messages.password'); }}:</label>
-							<div class="col-md-8"><input class="form-control" type="password" name="password" id="password" placeholder="{{ trans('messages.password'); }}" /></div>
-						</div>
-						<div class="row form-group">
-							<div class="col-md-8"></div>
-							<div class="col-md-4"><input type="submit" class="btn btn-primary btn-block" name="submit" value="{{ trans('messages.login'); }}" /></div>
-						</div>
-						<input type="hidden" name="_token" id="_token" value="{{  csrf_token(); }}"/>
+					<div class="row form-group">
+						<label class="col-md-4 control-label" for="email">{{ trans('messages.email'); }}:</label>
+						<div class="col-md-8"><input class="form-control" type="text" name="email" id="email" placeholder="{{ trans('messages.email'); }}" style="direction: ltr" /></div>
+					</div>			
+					<div class="row form-group">
+						<label class="col-md-4 control-label" for="password">{{ trans('messages.password'); }}:</label>
+						<div class="col-md-8"><input class="form-control" type="password" name="password" id="password" placeholder="{{ trans('messages.password'); }}" style="direction: ltr" /></div>
+					</div>
+					<div class="row form-group">
+						<div class="col-md-8"></div>
+						<div class="col-md-4"><input type="submit" class="btn btn-primary btn-block" name="submit" value="{{ trans('messages.login'); }}" /></div>
+					</div>
+					<input type="hidden" name="_token" id="_token" value="{{  csrf_token(); }}"/>
 				</form>
 			</div>
 			<div class="col-sm-4"></div>

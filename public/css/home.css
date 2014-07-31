@@ -1,0 +1,26 @@
+/****************
+ * بسم الله الرحمن الرحیم
+ *
+ ****************/
+
+#theadListHeader a{
+/* 	border: none; */
+/* 	background: none; */
+/* 	border-radius: 0px; */
+}
+
+#theadListHeader a:hover{
+/* 	background: #ddd; */
+}
+
+#theadListHeader a.active{
+/* 	background: linear-gradient(to bottom, #ddd 0px, #eee 100%); */
+}
+
+#theadListHeader button{
+	border-radius: 0px;
+	border-left: 0 none;
+	border-right: 0 none;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
