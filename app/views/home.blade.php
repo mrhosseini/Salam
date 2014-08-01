@@ -3,99 +3,11 @@
  * بسم الله الرحمن الرحیم
  *
  ****************/
-
 ?>
-<!doctype html>
-<html>
-<head>
-	<title></title>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> FIXME-->
-	{{ HTML::style('css/bootstrap.min.css'); }}
-	{{ HTML::style('css/bootstrap-theme.min.css'); }}
-<!-- 	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/cerulean/bootstrap.min.css" rel="stylesheet"> -->
-	{{ HTML::style('css/bootstrap-rtl.min.css'); }}
-	{{ HTML::style('css/home.css'); }}
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+@extends('layouts.base')
 
-</head>
-<body style="padding-top: 70px;">	
-<!--	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-		<div class="container-">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Project name</a>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>-->
-	
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnav">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href=".">{{trans('messages.salam')}}</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="topnav">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="./">{{trans('messages.home');}}</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img src="./img/avatar.png" alt="محمد رضا حسینی" class="img-circle" style="width: 18px;">
-										محمد رضا حسینی
-							<span>&nbsp;</span>
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu" style="left: 0;">
-							<li><a href="./profile">{{trans('messages.profile');}}</a></li>
-							<li><a href="./logout">{{trans('messages.logout');}}</a></li>
-						</ul>
-					</li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<div class="input-group input-group-sm">
-							<input type="text" class="form-control" placeholder="{{trans('messages.search')}}" />
-							<span class="input-group-btn">
-								<button class="btn btn-primary" type="submit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-								
-							</span>
-						</div>
-					</div>
-				</form>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav>
-	
+@section('body')
+@include('header')
 	<div class="container">
 		<div class="row" style="padding-bottom: 10px; border-bottom: 2px solid #bdf;">
 			<div class="col-md-10 col-sm-10 col-xs-6">
@@ -216,7 +128,7 @@
 					</tr>
 					<tr>
 						<td>
-							<div class="col-md-6"><a href="#">کمک برای مراسم محرم</a></div>
+							<div class="col-md-6"><a href="#">کمک برای مراسم محرم2</a></div>
 							<div class="col-md-1">مجمع</div>
 							<div class="col-md-2">2</div>
 							<div class="col-md-1">1</div>
@@ -227,13 +139,15 @@
 			</table>
 		</div>
 	</div><!-- /.container -->
-	
-	
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script> FIXME-->
-	<!-- Latest compiled and minified JavaScript -->
-<!-- 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> FIXME -->
-	{{ HTML::script('js/jquery.js'); }}
-	{{ HTML::script('js/bootstrap.min.js'); }}
-</body>
-</html>
+@stop
+
+@section('scripts')
+	<script>
+		$(document).ready(function(){
+			/*
+			 * activate the home button on navigation bar
+			 */
+			 $( "#nav-home" ).addClass("active");
+		});
+	</script>
+@stop
