@@ -19,5 +19,14 @@ class Thread extends Eloquent {
 	public function posts(){
 		return $this->hasMany('Post');
 	}
+	
+	
+// 	public function scopeRange($query, $from, $to){
+// 		return $query
+// 	}
+// 	
+// 	public function getThreads($query, $from, $to){
+// 		Thread::skip($from)
+// 	}
 
 }

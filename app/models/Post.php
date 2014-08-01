@@ -10,6 +10,13 @@ class Post extends Eloquent {
 	 */
 	protected $table = 'posts';
 	
+	/**
+	 * touch the thread object to update the timestamps of that thread
+	 *
+	 * @var string
+	 */
+	protected $touches = array('thread');
+	
 	
 	/**
 	 * Get the user of this post. Each #Post belongs to a #User
@@ -26,7 +33,7 @@ class Post extends Eloquent {
 	 *
 	 * @return the #Thread object 
 	 */
-	public function user(){
+	public function thread(){
 		return $this->belongsTo('Thread');
 	}
 

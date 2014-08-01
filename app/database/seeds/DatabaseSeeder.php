@@ -1,6 +1,8 @@
 <?php
 //بسم الله الرحمن الرحیم
 
+class 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -12,12 +14,26 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		$this->call('DeleterSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('UserProfileTableSeeder');
+		$this->call('ThreadTableSeeder');
 	}
 
 }
 
+/**
+ * deletes all table in data base
+ */
+class DeleterSeeder extends Seeder {
+	public function run(){
+		DB::table('posts')->delete();
+		DB::table('threads')->delete();
+		DB::table('userprofiles')->delete();
+		DB::table('users')->delete();
+	}
+
+}
 
 class UserTableSeeder extends Seeder {
 	
@@ -43,7 +59,34 @@ class UserProfileTableSeeder extends Seeder {
 			'university' => 'دانشگاه صنعتی اصفهان',
 			'job' => 'برنامه نویس',
 			'workplace' => 'مجمع فرهنگی شهید اژه‌ای; اصفهان',
-			'live_in' => 'اصفهان'
+			'live_in' => 'اصفهان',
+			'img' => '../app/storage/userimages/avatar.png'
 			));
 	} 
+}
+
+
+class ThreadTableSeeder extends Seeder {
+
+	public function run(){
+		DB::table('threads')->delete();
+		
+		Thread::create(array(
+			'title' => 'کمک برای مراسم محرم'
+			));
+		
+		Thread::create(array(
+			'title' => 'وظیفه ای به دور از توجیه و تضعیف (نگاهی به مشی سیاسی مرحوم علی صفایی حایری)'
+			));
+		
+		Thread::create(array(
+			'title' => 'کمک برای مراسم محرم2'
+			));
+	} 	
+	
+}
+
+
+class PostTableSeeder extends Seeder {
+
 }

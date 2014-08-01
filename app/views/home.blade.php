@@ -7,7 +7,7 @@
 @extends('layouts.base')
 
 @section('body')
-@include('header')
+@include('header', array('profile' => Auth::user()->profile))
 	<div class="container">
 		<div class="row" style="padding-bottom: 10px; border-bottom: 2px solid #bdf;">
 			<div class="col-md-10 col-sm-10 col-xs-6">

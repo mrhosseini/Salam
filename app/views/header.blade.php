@@ -2,20 +2,27 @@
 /****************
  * بسم الله الرحمن الرحیم
  *
+ * @file 
+ * @author
  ****************/
 
 ?>
+
+{{-- Pass a UserProfile object as input to this template                     --}}
+{{-- @input profile  a UserProfle object containing current user profile     --}}
+{{-- example: @include('header', array('profile' => Auth::user()->profile )) --}}
+
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnav">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href=".">{{ trans('messages.salam') }}</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topnav">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href=".">{{ trans('messages.salam') }}</a>
 			</div>
 			
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,9 +31,9 @@
 					<li id="nav-home"><a href="./">{{ trans('messages.home'); }}</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img src="./img/avatar.png" alt="{{ $firstname = Auth::user()->profile->firstname }} {{ $lastname = Auth::user()->profile->lastname }}" class="img-circle" style="width: 18px;">
-							{{ $firstname }}
-							{{ $lastname }}
+							<img src="{{ $profile->img }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
+							&nbsp;
+							{{ $profile->firstname }}&nbsp;{{ $profile->lastname }}
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu" style="left: 0;">
@@ -50,3 +57,4 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	
