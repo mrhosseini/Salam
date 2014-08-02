@@ -81,7 +81,19 @@
 				</thead>-->
 				<tbody>
 <!-- 					<tr><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td></tr> -->
-					<tr>
+					@foreach ($threads as $thread)
+						<tr>
+							<td>
+								<div class="col-md-6"><a href="./t/{{{ $thread->id }}}">{{{ $thread->title }}}</a></div>
+								<div class="col-md-1">مجمع</div>
+								<div class="col-md-2">2</div>
+								<div class="col-md-1">1</div>
+								<div class="col-md-2">مرداد ۹۳</div>
+							</td>
+						</tr>
+						
+					@endforeach
+			<!--		<tr>
 						<td>
 							<div class="col-md-6"><a href="#">کمک برای مراسم محرم</a></div>
 							<div class="col-md-1">مجمع</div>
@@ -134,7 +146,7 @@
 							<div class="col-md-1">1</div>
 							<div class="col-md-2">مرداد ۹۳</div>
 						</td>
-					</tr>
+					</tr>-->
 				</tbody>
 			</table>
 		</div>
