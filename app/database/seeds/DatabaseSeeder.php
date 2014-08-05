@@ -133,7 +133,7 @@ class PostTableSeeder extends Seeder {
 		DB::table('posts')->delete();
 		
 		for ($j = 0; $j < 10; $j++){
-			for ($i = 0; $i < 100; $i++){
+			for ($i = 0; $i < 104; $i++){
 				$max = rand(2,5);
 				if (rand(1, $max) != $max ){
 				
