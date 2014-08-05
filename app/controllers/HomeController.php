@@ -29,7 +29,7 @@ class HomeController extends BaseController {
 		/*
 		 * Fetch latest 25 threads
 		 */
-		$threads = Thread::orderBy('updated_at', 'DESC')->take(Constants::$threads_per_page)->get();
+		$threads = Thread::orderBy('permanent', 'DESC')->orderBy('updated_at', 'DESC')->take(Constants::$threads_per_page)->get();
 		foreach ($threads as $thread){
 			$posts = $thread->posts()->orderBy('created_at');
 			$thread_post_count["$thread->id"] = $posts->count();
