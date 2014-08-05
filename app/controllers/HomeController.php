@@ -29,7 +29,7 @@ class HomeController extends BaseController {
 		/*
 		 * Fetch latest 25 threads
 		 */
-		$threads = Thread::orderBy('updated_at', 'DESC')->take(25)->get();
+		$threads = Thread::orderBy('updated_at', 'DESC')->take(Constants::$threads_per_page)->get();
 		foreach ($threads as $thread){
 			$posts = $thread->posts()->orderBy('created_at');
 			$thread_post_count["$thread->id"] = $posts->count();
@@ -59,9 +59,9 @@ class HomeController extends BaseController {
 			arsort($authors_post_count);
  			
 			
- 			if ($count_unique <= 5){
+ 			if ($count_unique <= Constants::$author_list_capacity){
 				/*
-				 * if unique authors less than threshold all must be in list
+				 * if unique authors less than Constants::$author_list_capacity all must be in list
 				 */
 				$max_index = $count_unique - 1;
 				$current_index = 1;
@@ -84,18 +84,18 @@ class HomeController extends BaseController {
 					}
 				}
  			}
- 			else { /* $count_unique > 5 */
+ 			else { /* $count_unique >  Constants::$author_list_capacity*/
 				/*
-				 * if unique authors are more than threshold put first and last author
+				 * if unique authors are more than  Constants::$author_list_capacity put first and last author
 				 * and find authors with the most posts
 				 */
-				$author_list["$thread->id"][4] = User::find($last);
+				$author_list["$thread->id"][Constants::$author_list_capacity - 1] = User::find($last);
 				$current_index = 1;
 				foreach ($authors_post_count as $author => $post_count){
 					if ($author != $first && $author != $last){
 						$author_list["$thread->id"][$current_index] = User::find($author);
 						$current_index++;
-						if ($current_index >= 4)
+						if ($current_index >=  Constants::$author_list_capacity - 1)
 							break;
 					}
 				}

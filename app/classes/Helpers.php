@@ -27,6 +27,7 @@ class Helpers {
 	
 	/**
 	 * Converts english digits to persian digits if locale is set to fa
+	 * Adapted from wordpress jalai plugin
 	 * @param string str string to search for digits
 	 * @return converted string
 	 */
