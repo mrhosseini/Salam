@@ -31,7 +31,7 @@
 					<li id="nav-home"><a href="./">{{ trans('messages.home'); }}</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{{ $profile->img }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
+							<img src="{{ Constants::$profile_pics_path.$profile->img }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
 							&nbsp;
 							{{ $profile->firstname }}&nbsp;{{ $profile->lastname }}
 							<span class="caret"></span>

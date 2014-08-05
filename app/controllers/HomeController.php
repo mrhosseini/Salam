@@ -31,7 +31,9 @@ class HomeController extends BaseController {
 		 */
 		$threads = Thread::orderBy('updated_at', 'DESC')->take(25)->get();
 		foreach ($threads as $thread){
-			$posts = $thread->posts();
+			$posts = $thread->posts()->orderBy('created_at');
+			$thread_post_count["$thread->id"] = $posts->count();
+			
 			
 			$unique_authors = $posts->groupby('user_id')->lists('user_id');
 			$count_unique = count($unique_authors);
@@ -42,7 +44,8 @@ class HomeController extends BaseController {
  			/*
  			 * first author must be always the first in list
  			 */
- 			$author_list[0] = $authors[0];
+ 			$first = $authors[0];
+ 			$author_list["$thread->id"][0] = User::find($authors[0]);
  			
  			/*
  			 * save the last author for later use
@@ -62,21 +65,21 @@ class HomeController extends BaseController {
 				 */
 				$max_index = $count_unique - 1;
 				$current_index = 1;
-				if ($author_list[0] != $last){ 
+				if ($first != $last){ 
 					/*
 					 * if first and last authors are different then put the last author in its place
 					 */
-					$author_list[$max_index] = $last;
+					$author_list["$thread->id"][$max_index] = User::find($last);
 					$max_index--;
 				}
 				/*
 				 * if first and last authors are the same only show the first
 				 */
 				foreach ($unique_authors as $author){
-					if ($author != $author_list[0] && $author != $last){
+					if ($author != $first && $author != $last){
 						if ($current_index > $max_index)
 							break;
-						$author_list[$current_index] = $author;
+						$author_list["$thread->id"][$current_index] = User::find($author);
 						$current_index++;
 					}
 				}
@@ -86,25 +89,32 @@ class HomeController extends BaseController {
 				 * if unique authors are more than threshold put first and last author
 				 * and find authors with the most posts
 				 */
-				$author_list[4] = $last;
+				$author_list["$thread->id"][4] = User::find($last);
 				$current_index = 1;
 				foreach ($authors_post_count as $author => $post_count){
-					if ($author != $author_list[0] && $author != $author_list[4]){
-						$author_list[$current_index] = $author;
+					if ($author != $first && $author != $last){
+						$author_list["$thread->id"][$current_index] = User::find($author);
 						$current_index++;
 						if ($current_index >= 4)
 							break;
 					}
 				}
  			}
- 			
-			echo "<br>";
-			foreach ($posts as $post){
-				$writer_images[] = $post->user->profile->img;
-			}
 		}
+		
+// 		echo $threads->first()->id;
+// 		foreach ($author_list[99] as $author){
+// 			echo "<br><br><br>".$author->profile->img."<br>";
+// 			var_dump($author);
+// 			
+// 		}
+// 		echo "<br>";
+// 		print_r($thread_post_count);
 		 
-		return View::make('home')->with('threads', $threads);
+		return View::make('home')->with('threads', $threads)
+					 ->with('author_list', $author_list)
+					 ->with('post_count', $thread_post_count);
+					 
 	}
 
 }

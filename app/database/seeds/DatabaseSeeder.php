@@ -68,7 +68,7 @@ class UserProfileTableSeeder extends Seeder {
 			'job' => 'برنامه نویس',
 			'workplace' => 'مجمع فرهنگی شهید اژه‌ای; اصفهان',
 			'live_in' => 'اصفهان',
-			'img' => '../app/storage/userimages/avatar.png'
+			'img' => 'avatar.png'
 			));
 			
 		
@@ -84,7 +84,7 @@ class UserProfileTableSeeder extends Seeder {
 				'job' => Helpers::randomPersianString(rand(7,15)),
 				'workplace' => Helpers::randomPersianString(rand(10,20)),
 				'live_in' => Helpers::randomPersianString(rand(3,10)),
-				'img' => '../app/storage/userimages/avatar.png',
+				'img' => $i.'.jpg',
 			));
 		}
 	} 

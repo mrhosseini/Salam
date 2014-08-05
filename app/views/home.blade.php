@@ -86,9 +86,21 @@
 							<td>
 								<div class="col-md-6"><a href="./t/{{{ $thread->id }}}">{{{ $thread->title }}}</a></div>
 								<div class="col-md-1">مجمع</div>
-								<div class="col-md-2">2</div>
-								<div class="col-md-1">1</div>
-								<div class="col-md-2">مرداد ۹۳</div>
+								<div class="col-md-2">
+									@foreach ($author_list[$thread->id] as $author)
+										<a href="./user/{{ $author->id }}" 
+										   title="{{{ $author->profile->firstname }}} {{{ $author->profile->lastname }}}">
+											<img src="{{ Constants::$profile_pics_path.$author->profile->img }}" alt="" style="width: 25px; border-radius: 3px;" >
+										</a>
+									@endforeach
+								</div>
+								<div class="col-md-1 text-center">
+									<span>{{ $post_count[$thread->id] }}</span>
+								</div>
+								<div class="col-md-2">
+									{{ $thread->created_at }}
+									{{ $thread->updated_at }}
+								</div>
 							</td>
 						</tr>
 						
