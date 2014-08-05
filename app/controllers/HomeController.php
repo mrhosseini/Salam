@@ -2,34 +2,52 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
-// 	public function showWelcome()
-// 	{
-// 		return View::make('hello');
-// 	}
-
 	/**
-	 * Fetches the required data and shows the home view
-	 * @return home view
+	 * Default home controller. Shows threads list page by page
 	 */
-	public function showHome(){
+	public function showHome($pageNumber = 1){
+		
+		if ($pageNumber < 1)
+			$pageNumber = 1;
+			
+		$isLastPage = false;
+			
 	
 		/*
-		 * Fetch latest 25 threads
+		 * Fetch threads in this page
 		 */
-		$threads = Thread::orderBy('permanent', 'DESC')->orderBy('updated_at', 'DESC')->take(Constants::$threads_per_page)->get();
+		$threads = Thread::orderBy('permanent', 'DESC')
+				 ->orderBy('updated_at', 'DESC')
+				 ->skip(Constants::$threads_per_page * ($pageNumber -1))
+				 ->take(Constants::$threads_per_page)
+				 ->get();
+		
+		/*
+		 * if there is no threads in this page redirect to first page
+		 */
+		if ($threads->isEmpty()){
+			return Redirect::to("/");
+		}
+			
+		/*
+		 * Fetch threads in next page to see if current page is the last page
+		 */		 
+		$nextPagethreads = Thread::orderBy('permanent', 'DESC')
+				 ->orderBy('updated_at', 'DESC')
+				 ->skip(Constants::$threads_per_page * ($pageNumber))
+				 ->take(Constants::$threads_per_page)
+				 ->get();
+		
+		if ($nextPagethreads->isEmpty()){
+			$isLastPage = true;
+		}
+				 
+		/*
+		 * calculate post counts and make the athor list of each thread
+		 * First in list: author of first post
+		 * Last in list: author of last post
+		 * other: authors with most posts in descending order
+		 */
 		foreach ($threads as $thread){
 			$posts = $thread->posts()->orderBy('created_at');
 			$thread_post_count["$thread->id"] = $posts->count();
@@ -101,21 +119,11 @@ class HomeController extends BaseController {
 				}
  			}
 		}
-		
-// 		echo $threads->first()->id;
-// 		foreach ($author_list[99] as $author){
-// 			echo "<br><br><br>".$author->profile->img."<br>";
-// 			var_dump($author);
-// 			
-// 		}
-// 		echo "<br>";
-// 		print_r($thread_post_count);
 		 
 		return View::make('home')->with('threads', $threads)
 					 ->with('author_list', $author_list)
-					 ->with('post_count', $thread_post_count);
-					 
+					 ->with('post_count', $thread_post_count)
+					 ->with('pageNumber', $pageNumber)
+					 ->with('isLastPage', $isLastPage);
 	}
-
 }
-
