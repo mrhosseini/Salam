@@ -22,23 +22,23 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href=".">{{ trans('messages.salam') }}</a>
+				<a class="navbar-brand" href="{{ URL::to('/') }}">{{ trans('messages.salam') }}</a>
 			</div>
 			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="topnav">
 				<ul class="nav navbar-nav">
-					<li id="nav-home"><a href="./">{{ trans('messages.home'); }}</a></li>
+					<li id="nav-home"><a href="{{ URL::to('/') }}">{{ trans('messages.home'); }}</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{{ Constants::$profile_pics_path.$profile->img }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
+							<img src="{{ URL::to(Constants::$profile_pics_path.$profile->img) }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
 							&nbsp;
 							{{ $profile->firstname }}&nbsp;{{ $profile->lastname }}
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu" style="left: 0;">
-							<li><a href="./profile">{{ trans('messages.profile'); }}</a></li>
-							<li><a href="./logout">{{ trans('messages.logout'); }}</a></li>
+							<li><a href="{{ URL::to('/profile') }}">{{ trans('messages.profile'); }}</a></li>
+							<li><a href="{{ URL::to('/logout') }}">{{ trans('messages.logout'); }}</a></li>
 						</ul>
 					</li>
 				</ul>

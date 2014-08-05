@@ -28,5 +28,8 @@ return array(
     'activity' => 'تاریخ',
     'first_post' => 'اولین ارسال',
     'last_post' => 'آخرین ارسال',
+    'newer_threads' => 'جدیدتر <span class="glyphicon glyphicon-arrow-left" ></span>',
+    'older_threads' => '<span class="glyphicon glyphicon-arrow-right" ></span> قدیمی‌تر',
+    
 );
 

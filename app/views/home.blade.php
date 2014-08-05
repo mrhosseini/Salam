@@ -78,16 +78,16 @@
 									@if ($thread->permanent)
 										<span class="glyphicon glyphicon-pushpin" style="color: #555; font-size: 0.9em"></span>&nbsp;
 									@endif
-									<a href="./t/{{{ $thread->id }}}">{{{ $thread->title }}}</a>
+									<a href="{{ URL::to('/t/'.$thread->id) }}">{{{ $thread->title }}}</a>
 								</div>
 								<div class="col-md-1 text-center">
 									<span class="label" style="background-color: navy;">مجمع</span>
 								</div>
 								<div class="col-md-2 ">
 									@foreach ($author_list[$thread->id] as $author)
-										<a href="./user/{{ $author->id }}" 
+										<a href="{{ URL::to('/user/'.$author->id) }}" 
 										   title="{{{ $author->profile->firstname }}} {{{ $author->profile->lastname }}}">
-											<img src="{{ Constants::$profile_pics_path.$author->profile->img }}" alt="" style="width: 25px; border-radius: 3px;" >
+											<img src="{{ URL::to(Constants::$profile_pics_path.$author->profile->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
 										</a>
 									@endforeach
 								</div>
@@ -97,27 +97,33 @@
 								</div>
 								<div class="col-md-2">
 									<div class="row">
-									<div class="col-sm-6" style="padding: 0px 15px 0px 0px;">
-									<a href="#" class="text-info small" title="{{ trans('messages.first_post') }}: {{ jDate::forge($thread->created_at)->format('%e %B %Y, %H: %M') }}">
-										<span class="glyphicon glyphicon-time "></span>
-										{{ Helpers::digits2Persian(jDate::forge($thread->created_at)->shortAgo()) }}
-									</a>
-									</div>
-<!-- 									&nbsp;&nbsp; -->
-									<div class="col-sm-6" style="padding: 0px 0px 0px 15px;">
-									<a href="#" class="text-success small" title="{{ trans('messages.last_post') }}: {{ jDate::forge($thread->updated_at)->format('%e %B %Y, %H: %M') }}">
-										<span class="glyphicon glyphicon-time"></span>
-										{{ Helpers::digits2Persian(jDate::forge($thread->updated_at)->shortAgo()) }}
-									</a>
-									</div>
+										<div class="col-sm-6" style="padding: 0px 15px 0px 0px;">
+											<a href="#" class="text-info small" title="{{ trans('messages.first_post') }}: {{ jDate::forge($thread->created_at)->format('%e %B %Y, %H: %M') }}">
+												<span class="glyphicon glyphicon-time "></span>
+												{{ Helpers::digits2Persian(jDate::forge($thread->created_at)->shortAgo()) }}
+											</a>
+										</div>
+										<div class="col-sm-6" style="padding: 0px 0px 0px 15px;">
+											<a href="#" class="text-success small" title="{{ trans('messages.last_post') }}: {{ jDate::forge($thread->updated_at)->format('%e %B %Y, %H: %M') }}">
+												<span class="glyphicon glyphicon-time"></span>
+												{{ Helpers::digits2Persian(jDate::forge($thread->updated_at)->shortAgo()) }}
+											</a>
+										</div>
 									</div>
 								</div>
 							</td>
 						</tr>
-						
 					@endforeach
 				</tbody>
 			</table>
+		</div>
+		<div class="row" style="border-top: 2px solid #bdf;">
+			<div class="col-md-2"></div>
+			<ul class="pager col-md-8">
+				<li class="previous"><a href="{{ route('p', $pageNumber + 1) }}">{{ trans('messages.older_threads') }}</a></li>
+				<li class="next @if ($pageNumber == 1) {{ "disabled" }} @endif" ><a href="{{ route('p', $pageNumber - 1) }}">{{ trans('messages.newer_threads') }}</a></li>
+			</ul>
+			<div class="col-md-2"></div>
 		</div>
 	</div><!-- /.container -->
 @stop

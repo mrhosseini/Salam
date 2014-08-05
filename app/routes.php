@@ -16,7 +16,9 @@
 |
 */
 
-Route::get('/', array('before' => 'auth', 'uses' => 'HomeController@showHome'));
+Route::get('/', array('before' => 'auth', 'as' => 'home', 'uses' => 'HomeController@showHome'));
+
+Route::get('p/{num?}', array('before' => 'auth', 'as' => 'p', 'uses' => 'HomeController@showHome2'));
 
 Route::get('login', array('before' => 'guest', function(){
 	return View::make('login');
