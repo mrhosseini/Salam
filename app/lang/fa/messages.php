@@ -21,5 +21,12 @@ return array(
     'latest' => 'جدیدترین',
     'unread' => 'خوانده نشده',
     'new_message' => 'ارسال جدید',
+    'topic' => 'عنوان',
+    'category' => 'دسته',
+    'posts' => 'مطالب',
+    'users' => 'افراد',
+    'activity' => 'تاریخ',
+    'first_post' => 'اولین ارسال',
+    'last_post' => 'آخرین ارسال',
 );
 

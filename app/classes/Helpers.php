@@ -24,4 +24,30 @@ class Helpers {
 		}
 		return $str;
 	}
+	
+	/**
+	 * Converts english digits to persian digits if locale is set to fa
+	 * @param string str string to search for digits
+	 * @return converted string
+	 */
+	public static function digits2Persian($str){
+		if (Lang::getLocale() == 'fa'){
+			return preg_replace_callback(
+				'/(?:&#\d{2,4};)|(\d+[\.\d]*)|(?:[a-z](?:[\x00-\x3B\x3D-\x7F]|<\s*[^>]+>)*)|<\s*[^>]+>/i',
+				function($matches){
+					$farsi_array = array("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٫");
+					$english_array = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".");
+		
+					$out = '';
+					if (isset($matches[1])) {
+						return str_replace($english_array, $farsi_array, $matches[1]);
+					}
+					return $matches[0];
+				},
+				$str);
+		}
+		else{
+			return $str;
+		}
+	}
 }

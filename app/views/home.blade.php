@@ -37,8 +37,8 @@
 						</ul>
 					</li>
 					<li class="divider"></li>
-					<li class="active"><a href="#">{{trans('messages.latest');}}</a></li>
-					<li><a href="#">{{trans('messages.unread');}}</a></li>
+					<li class="active"><a href="#">{{ trans('messages.latest'); }}</a></li>
+					<li><a href="#">{{ trans('messages.unread'); }}</a></li>
 				</ul>
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-12">
@@ -48,7 +48,7 @@
 				</button>-->
 				<a href="./new" role="button" class="btn btn-success">
 					<span class="glyphicon glyphicon-plus"></span>
-					{{trans('messages.new_message');}}
+					{{ trans('messages.new_message'); }}
 				</a>
 			</div>
 		</div>
@@ -56,37 +56,34 @@
 	
 	<div class="container">
 		<div class="row" id="theadListHeader" style="padding-top: 10px;">
-				<button class="col-md-6 btn btn-default active" type="button">عنوان
-					<span class="caret"></span>
+				<button class="col-md-6 btn btn-default" type="button">
+					{{ trans('messages.topic'); }}
+<!-- 					<span class="glyphicon glyphicon-chevron-down" style="font-size: 0.9em"></span> -->
 				</button>
-				<button class="col-md-1 btn btn-default" type="button">دسته</button>
-				<button class="col-md-2 btn btn-default" type="button">افراد</button>
-				<button class="col-md-1 btn btn-default" type="button">مطالب</button>
-				<button class="col-md-2 btn btn-default" type="button">تاریخ</button>
+				<button class="col-md-1 btn btn-default" type="button">{{ trans('messages.category') }}</button>
+				<button class="col-md-2 btn btn-default" type="button">{{ trans('messages.users') }}</button>
+				<button class="col-md-1 btn btn-default" type="button">{{ trans('messages.posts') }}</button>
+				<button class="col-md-2 btn btn-default" type="button">{{ trans('messages.activity') }}</button>
 		</div>
 		<div class="row">
 			<table class="table table-striped table-hover">
-<!--				<thead>
-					<tr>
-						<th>
-							<a href="#" class="btn btn-default btn-block active" role="button">
-							عنوان
-								<span style="glyphicon glyphicon-chevron-down"></span>
-							</a>
-						</th>
-						<th><a href="#" class="btn btn-default btn-block" role="button">افراد</a></th>
-						<th><a href="#" class="btn btn-default btn-block" role="button">مطالب</a></th>
-						<th><a href="#" class="btn btn-default btn-block" role="button">تاریخ</a></th>
-						
-				</thead>-->
 				<tbody>
-<!-- 					<tr><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td><td>#</td></tr> -->
 					@foreach ($threads as $thread)
 						<tr>
 							<td>
-								<div class="col-md-6"><a href="./t/{{{ $thread->id }}}">{{{ $thread->title }}}</a></div>
-								<div class="col-md-1">مجمع</div>
-								<div class="col-md-2">
+								<div class="col-md-6">
+									@if ($thread->locked)
+										<span class="glyphicon glyphicon-lock" style="color: #555; font-size: 0.8em"></span>&nbsp;
+									@endif
+									@if ($thread->permanent)
+										<span class="glyphicon glyphicon-pushpin" style="color: #555; font-size: 0.9em"></span>&nbsp;
+									@endif
+									<a href="./t/{{{ $thread->id }}}">{{{ $thread->title }}}</a>
+								</div>
+								<div class="col-md-1 text-center">
+									<span class="label" style="background-color: navy;">مجمع</span>
+								</div>
+								<div class="col-md-2 ">
 									@foreach ($author_list[$thread->id] as $author)
 										<a href="./user/{{ $author->id }}" 
 										   title="{{{ $author->profile->firstname }}} {{{ $author->profile->lastname }}}">
@@ -95,70 +92,30 @@
 									@endforeach
 								</div>
 								<div class="col-md-1 text-center">
-									<span>{{ $post_count[$thread->id] }}</span>
+									<span>{{ Helpers::digits2Persian($post_count[$thread->id]) }}</span>
+									<span class="glyphicon glyphicon-comment" style="color: gray"></span>
 								</div>
 								<div class="col-md-2">
-									{{ $thread->created_at }}
-									{{ $thread->updated_at }}
+									<div class="row">
+									<div class="col-sm-6" style="padding: 0px 15px 0px 0px;">
+									<a href="#" class="text-info small" title="{{ trans('messages.first_post') }}: {{ jDate::forge($thread->created_at)->format('%e %B %Y, %H: %M') }}">
+										<span class="glyphicon glyphicon-time "></span>
+										{{ Helpers::digits2Persian(jDate::forge($thread->created_at)->shortAgo()) }}
+									</a>
+									</div>
+<!-- 									&nbsp;&nbsp; -->
+									<div class="col-sm-6" style="padding: 0px 0px 0px 15px;">
+									<a href="#" class="text-success small" title="{{ trans('messages.last_post') }}: {{ jDate::forge($thread->updated_at)->format('%e %B %Y, %H: %M') }}">
+										<span class="glyphicon glyphicon-time"></span>
+										{{ Helpers::digits2Persian(jDate::forge($thread->updated_at)->shortAgo()) }}
+									</a>
+									</div>
+									</div>
 								</div>
 							</td>
 						</tr>
 						
 					@endforeach
-			<!--		<tr>
-						<td>
-							<div class="col-md-6"><a href="#">کمک برای مراسم محرم</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="col-md-6"><a href="#">کمک برای مراسم محرم</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="col-md-6"><a href="#">حذف عبارات "آیت الله" و "آیت الله العظمی" از سایت آقای سیستانی</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="col-md-6"><a href="#">وظیفه ای به دور از توجیه و تضعیف (نگاهی به مشی سیاسی مرحوم علی صفایی حایری)</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="col-md-6"><a href="#">This is just a long top title, a very very very very very very very very very very very very very long title</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="col-md-6"><a href="#">کمک برای مراسم محرم2</a></div>
-							<div class="col-md-1">مجمع</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-1">1</div>
-							<div class="col-md-2">مرداد ۹۳</div>
-						</td>
-					</tr>-->
 				</tbody>
 			</table>
 		</div>
