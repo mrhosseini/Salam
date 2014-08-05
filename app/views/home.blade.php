@@ -98,13 +98,13 @@
 								<div class="col-md-2">
 									<div class="row">
 										<div class="col-sm-6" style="padding: 0px 15px 0px 0px;">
-											<a href="#" class="text-info small" title="{{ trans('messages.first_post') }}: {{ jDate::forge($thread->created_at)->format('%e %B %Y, %H: %M') }}">
+											<a href="#" class="text-info small" title="{{ trans('messages.first_post') }}: {{ jDate::forge($thread->created_at)->format('%e %B %Y, %M: %H') }}">
 												<span class="glyphicon glyphicon-time "></span>
 												{{ Helpers::digits2Persian(jDate::forge($thread->created_at)->shortAgo()) }}
 											</a>
 										</div>
 										<div class="col-sm-6" style="padding: 0px 0px 0px 15px;">
-											<a href="#" class="text-success small" title="{{ trans('messages.last_post') }}: {{ jDate::forge($thread->updated_at)->format('%e %B %Y, %H: %M') }}">
+											<a href="#" class="text-success small" title="{{ trans('messages.last_post') }}: {{ jDate::forge($thread->updated_at)->format('%e %B %Y, %M: %H') }}">
 												<span class="glyphicon glyphicon-time"></span>
 												{{ Helpers::digits2Persian(jDate::forge($thread->updated_at)->shortAgo()) }}
 											</a>
