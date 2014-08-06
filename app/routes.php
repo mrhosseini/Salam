@@ -31,3 +31,5 @@ Route::get('logout', array('before' => 'auth', function(){
 	Auth::logout();
 	return Redirect::to('login');
 }));
+
+Route::get('t/{id}', array('before' => 'auth', 'uses' => 'ThreadController@showThreadPosts'))->where('id', '[0-9]+');;
