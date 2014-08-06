@@ -121,14 +121,14 @@
 			<div class="col-md-2"></div>
 			<ul class="pager col-md-8">
 				@if ($isLastPage == false)
-					<li class="previous"><a href="{{ route('p', $pageNumber + 1) }}">{{ trans('messages.older_threads') }}</a></li>
+					<li class="previous"><a href="{{ route('page', $pageNumber + 1) }}">{{ trans('messages.older_threads') }}</a></li>
 				@else
 					<li class="previous disabled"><a>{{ trans('messages.older_threads') }}</a></li>
 				@endif
 				@if ($pageNumber == 1)
 					<li class="next disabled"><a>{{ trans('messages.newer_threads') }}</a></li>
 				@else
-					<li class="next"><a href="{{ route('p', $pageNumber - 1) }}">{{ trans('messages.newer_threads') }}</a></li>
+					<li class="next"><a href="{{ route('page', $pageNumber - 1) }}">{{ trans('messages.newer_threads') }}</a></li>
 				@endif
 				
 			</ul>
