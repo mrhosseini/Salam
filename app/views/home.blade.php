@@ -11,19 +11,6 @@
 	<div class="container">
 		<div class="row" style="padding-bottom: 10px; border-bottom: 2px solid #bdf;">
 			<div class="col-md-10 col-sm-10 col-xs-6">
-				<!--<div class="btn-group">
-						<button type="button" class="btn btn-danger active">{{trans('messages.categories');}}</button>
-						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" style="background-color: green; color: white; margin: 5px;" >مجمع</a></li>
-							<li><a href="#" style="background-color: blue; color: white; margin: 5px;">عمومی</a></li>
-							<li><a href="#" style="background-color: navy; color: white; margin: 5px;">سیاسی</a></li>
-							<li><a href="#" style="background-color: orange; color: white; margin: 5px;">زنگ تفریح</a></li>
-						</ul>
-				</div>-->
 				<ul class="nav nav-pills">
 					<li class="dropdown active">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="background-color:#810074">
@@ -42,10 +29,6 @@
 				</ul>
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-12">
-				<!--<button type="button" class="btn btn-success">
-					<span class="glyphicon glyphicon-plus"></span>
-					{{trans('messages.new_message');}}
-				</button>-->
 				<a href="./new" role="button" class="btn btn-success">
 					<span class="glyphicon glyphicon-plus"></span>
 					{{ trans('messages.new_message'); }}
@@ -130,7 +113,6 @@
 				@else
 					<li class="next"><a href="{{ route('page', $pageNumber - 1) }}">{{ trans('messages.newer_threads') }}</a></li>
 				@endif
-				
 			</ul>
 			<div class="col-md-2"></div>
 		</div>
