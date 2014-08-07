@@ -67,12 +67,18 @@
 									<span class="label" style="background-color: navy;">مجمع</span>
 								</div>
 								<div class="col-md-2 ">
-									@foreach ($author_list[$thread->id] as $author)
-										<a href="{{ URL::to('/user/'.$author->id) }}" 
+									{{-- @foreach ($author_list[$thread->id] as $author) --}}
+									@for ($i = 0; $i < count($author_list[$thread->id]); $i++)
+										{{-- <a href="{{ URL::to('/user/'.$author->id) }}" 
 										   title="{{{ $author->profile->firstname }}} {{{ $author->profile->lastname }}}">
 											<img src="{{ URL::to(Constants::$profile_pics_path.$author->profile->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
+										</a> --}}
+										<a href="{{ URL::to('/user/'.$author_list[$thread->id][$i]->id) }}" 
+										   title="{{{ $author_list[$thread->id][$i]->profile->firstname }}} {{{ $author_list[$thread->id][$i]->profile->lastname }}}">
+											<img src="{{ URL::to(Constants::$profile_pics_path.$author_list[$thread->id][$i]->profile->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
 										</a>
-									@endforeach
+									@endfor
+									{{-- @endforeach --}}
 								</div>
 								<div class="col-md-1 text-center">
 									<span>{{ Helpers::digits2Persian($post_count[$thread->id]) }}</span>

@@ -21,7 +21,8 @@
 								</a>
 							</div>
 							<div class="col-md-11">
-								{{ $post->body }}
+								<div class="row">{{ $post->created_at }}</div>
+								<div class="row">{{ $post->body }}</div>
 							</div>
 						</div>
 					@endforeach
