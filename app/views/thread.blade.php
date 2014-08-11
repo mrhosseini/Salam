@@ -31,7 +31,7 @@
 									{{ $post->user->profile->firstname }}
 									{{ $post->user->profile->lastname }}
 								</div>
-								<div class="col-md-2 col-xs-3" style="text-align: left; padding-top: 10px;">
+								<div class="col-md-2 col-xs-3" style="text-align: left; padding-top: 10px; color: #333;">
 									<span class="glyphicon glyphicon-time"></span>
 									{{ Helpers::digits2Persian(jDate::forge($post->created_at)->shortAgo()) }}
 								</div>
