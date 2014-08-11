@@ -28,6 +28,8 @@
 		{{ HTML::style('css/home.css'); }}
 	@show
 	
+	@yield('header_scripts')
+	
 	<title>@yield('title')</title>
 
 </head>

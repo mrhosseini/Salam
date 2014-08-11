@@ -6,6 +6,25 @@
 ?>
 @extends('layouts.base')
 
+@section('header_scripts')
+	{{ HTML::script('js/tinymce/tinymce.min.js'); }}
+	<script>
+		tinymce.init({
+			selector: "textarea",
+			plugins: "directionality link emoticons textcolor image",
+			toolbar: "undo redo | ltr rtl | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link image | fontselect fontsizeselect | forecolor backcolor | emoticons",
+			menu: false,
+			menubar : false,
+			statusbar: false,
+			resize: false,
+			element_format : "html",
+			language : 'fa',
+			height: 300,
+		});
+
+	</script>
+@stop
+
 @section('title')
 {{ trans('messages.salam') }}
 |
@@ -20,7 +39,7 @@
 				<div class="row" style="background-color: #feffff; padding: 10px 10px 10px 10px;">
 					<h3 style="padding-bottom: 15px;">{{ $thread->title }}</h3>
 					@foreach ($posts as $post)
-						<div class="row" style="padding-bottom: 30px;">
+						<div class="row" style="padding-bottom: 30px; margin-left:0px;">
 							<div class="row" style="background-color: #f3f3f3; padding-top: 2px; padding-bottom: 2px; margin-left:0px; margin-right:0px; border-top: 1px solid #ddd;">
 								<div class="col-md-1 col-xs-2">
 									<a  href="{{ URL::to('/user/'.$post->user_id) }}">
@@ -36,12 +55,16 @@
 									{{ Helpers::digits2Persian(jDate::forge($post->created_at)->shortAgo()) }}
 								</div>
 							</div>
-							<div class ="row">
+							<div class ="row" style="margin-left:0px;">
 								<div class="col-md-1 col-xs-1"></div>
 								<div class="col-md-10 col-xs-10" style="padding-top: 15px; line-height: 2em;">{{ $post->body }}</div>
 							</div>
 						</div>
 					@endforeach
+				</div>
+				<div>
+					<textarea>
+					</textarea>
 				</div>
 			</div>
 			
@@ -50,7 +73,4 @@
 @stop
 
 @section('scripts')
-	<script>
-
-	</script>
 @stop

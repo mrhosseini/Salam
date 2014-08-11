@@ -1573,6 +1573,7 @@ return array(
     'System_SSH_Agent_Identity' => $vendorDir . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'Thread' => $baseDir . '/app/models/Thread.php',
+    'ThreadController' => $baseDir . '/app/controllers/ThreadController.php',
     'ThreadTableSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'User' => $baseDir . '/app/models/User.php',
     'UserController' => $baseDir . '/app/controllers/UserController.php',
