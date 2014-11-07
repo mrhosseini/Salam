@@ -30,6 +30,7 @@ return array(
     'last_post' => 'آخرین ارسال',
     'newer_threads' => 'جدیدتر <span class="glyphicon glyphicon-chevron-left" ></span>',
     'older_threads' => '<span class="glyphicon glyphicon-chevron-right" ></span> قدیمی‌تر',
+    'send_reply' => 'ارسال پاسخ',
     
 );
 

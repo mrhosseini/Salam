@@ -18,7 +18,7 @@
 
 Route::get('/', array('before' => 'auth', 'as' => 'home', 'uses' => 'HomeController@showHome'));
 
-Route::get('/{num?}', array('before' => 'auth', 'as' => 'page', 'uses' => 'HomeController@showHome'))->where('num', '[0-9]+');;
+Route::get('/{num?}', array('before' => 'auth', 'as' => 'page', 'uses' => 'HomeController@showHome'))->where('num', '[0-9]+');
 
 Route::get('login', array('before' => 'guest', function(){
 	return View::make('login');
@@ -32,4 +32,6 @@ Route::get('logout', array('before' => 'auth', function(){
 	return Redirect::to('login');
 }));
 
-Route::get('t/{id}', array('before' => 'auth', 'uses' => 'ThreadController@showThreadPosts'))->where('id', '[0-9]+');;
+Route::get('t/{id}', array('before' => 'auth', 'uses' => 'ThreadController@showThreadPosts'))->where('id', '[0-9]+');
+
+Route::post('reply', array('before' => 'auth', 'uses' => 'PostController@sendReply'));

@@ -11,6 +11,7 @@
 	<script>
 		tinymce.init({
 			selector: "textarea",
+			directionality: "rtl",
 			plugins: "directionality link emoticons textcolor image",
 			toolbar: "undo redo | ltr rtl | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link image | fontselect fontsizeselect | forecolor backcolor | emoticons",
 			menu: false,
@@ -62,10 +63,17 @@
 						</div>
 					@endforeach
 				</div>
-				<div>
-					<textarea>
-					</textarea>
+				<div id="reply">
+					<form name="frmReply" method="post" action="{{ URL::to('reply') }}">
+						<textarea name="replyMessage">
+						</textarea>
+						<div style="padding-top: 10px;">
+							<button id="btnReply" type="submit" class="btn btn-success">{{ trans('messages.send_reply') }}</button>
+						</div>
+					</form>
 				</div>
+				<div class="row" style="min-height: 20px;"></div>
+				
 			</div>
 			
 		</div>
@@ -73,4 +81,28 @@
 @stop
 
 @section('scripts')
+	<script>
+		$(document).ready(function(){
+			// Attach a click handler to the button
+			$( "frmReply" ).submit(function() {
+				event.preventDefault();
+				url = '{{ URL::to("reply") }}';
+				alert(url);
+// 				post = $( "#reply > textarea" ).text();
+// 				alert(post);
+				// Send the data using post
+				var posting = $.post( url, $( "#frmReply" ).serialize());
+				// Put the results in a div
+				posting.done(function(data) {
+					if (data.status == 0){
+						$( "#msg" ).html(data.msg);
+						$( "#msgDiv" ).show('zoom');
+					}
+					else{
+						$(document).attr('location', './');
+					}
+				});
+			});
+		});
+	</script>
 @stop
