@@ -7,6 +7,13 @@ class HomeController extends BaseController {
 	 */
 	public function showHome($pageNumber = 1){
 		
+		/*
+		 * forget current thread
+		 */
+		Session::forget('thread');
+		
+		
+		
 		if ($pageNumber < 1)
 			$pageNumber = 1;
 			

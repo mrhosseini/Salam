@@ -10,6 +10,10 @@ class ThreadController extends Controller {
 		$thread=Thread::find($thread_id);
 		$posts = $thread->posts()->orderBy('created_at')->get();
 		
+		/*
+		 * save current thread id in session
+		 */
+		Session::put('thread', $thread_id);
 		return View::make('thread')->with('thread', $thread)
 					   ->with('posts', $posts);
 	}

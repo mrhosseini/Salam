@@ -58,24 +58,20 @@
 							</div>
 							<div class ="row" style="margin-left:0px;">
 								<div class="col-md-1 col-xs-1"></div>
-								<div class="col-md-10 col-xs-10" style="padding-top: 15px; line-height: 2em;">{{ $post->body }}</div>
+								<div class="col-md-10 col-xs-10" style="padding-top: 15px; line-height: 2em; ">{{ $post->body }}</div>
 							</div>
 						</div>
 					@endforeach
 				</div>
 				<div id="reply">
-					<form name="frmReply" method="post" action="{{ URL::to('reply') }}">
-						<textarea name="replyMessage">
-						</textarea>
-						<div style="padding-top: 10px;">
-							<button id="btnReply" type="submit" class="btn btn-success">{{ trans('messages.send_reply') }}</button>
-						</div>
-					</form>
+					<textarea name="replyMessage">
+					</textarea>
+					<div style="padding-top: 10px;">
+						<button id="btnReply" type="button" class="btn btn-success">{{ trans('messages.send_reply') }}</button>
+					</div>
 				</div>
 				<div class="row" style="min-height: 20px;"></div>
-				
 			</div>
-			
 		</div>
 	</div><!-- /.container -->
 @stop
@@ -84,14 +80,12 @@
 	<script>
 		$(document).ready(function(){
 			// Attach a click handler to the button
-			$( "frmReply" ).submit(function() {
-				event.preventDefault();
+			$( "#btnReply" ).click(function() {
 				url = '{{ URL::to("reply") }}';
-				alert(url);
-// 				post = $( "#reply > textarea" ).text();
-// 				alert(post);
+				// get content of tinyMCE editor
+				post = tinyMCE.activeEditor.getContent();
 				// Send the data using post
-				var posting = $.post( url, $( "#frmReply" ).serialize());
+				var posting = $.post( url, {'post': post});
 				// Put the results in a div
 				posting.done(function(data) {
 					if (data.status == 0){
@@ -99,7 +93,10 @@
 						$( "#msgDiv" ).show('zoom');
 					}
 					else{
-						$(document).attr('location', './');
+// 						$("body").load(data.url);
+						//clear tinyMCE content as it is posted now
+						tinyMCE.activeEditor.setContent('');
+						location.reload();
 					}
 				});
 			});
