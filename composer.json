@@ -5,8 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		 "miladr/jalali": "dev-master"
-		
+		"miladr/jalali": "dev-master",
+		"mews/purifier": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

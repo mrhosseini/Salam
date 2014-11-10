@@ -122,7 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Miladr\Jalali\JalaliServiceProvider',
-
+		'Mews\Purifier\PurifierServiceProvider',
 	),
 
 	/*
@@ -189,7 +189,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+		'Purifier' => 'Mews\Purifier\Facades\Purifier',
 	),
 
 );
