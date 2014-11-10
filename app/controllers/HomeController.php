@@ -10,7 +10,7 @@ class HomeController extends BaseController {
 		/*
 		 * forget current thread
 		 */
-		Session::forget('thread');		
+		Session::forget('thread');
 		
 		if ($pageNumber < 1)
 			$pageNumber = 1;
