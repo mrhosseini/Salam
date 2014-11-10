@@ -10,10 +10,7 @@ class HomeController extends BaseController {
 		/*
 		 * forget current thread
 		 */
-		Session::forget('thread');
-		
-		echo Purifier::clean("<p>salam</p>");
-		
+		Session::forget('thread');		
 		
 		if ($pageNumber < 1)
 			$pageNumber = 1;
