@@ -12,6 +12,7 @@ class HomeController extends BaseController {
 		 */
 		Session::forget('thread');
 		
+		echo Purifier::clean("<p>salam</p>");
 		
 		
 		if ($pageNumber < 1)

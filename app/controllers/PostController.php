@@ -13,7 +13,9 @@ class PostController extends Controller {
 			$post_body = Input::get('post');
 			$thread_id = Session::get('thread');
 			
-			//TODO: purify post_body
+			//purify post_body for security and clean up
+			$post_body = Purifier::clean($post_body);
+			
 			$new_post = new Post;
 			$new_post->thread_id = $thread_id;
 			$new_post->user_id = Auth::id();
@@ -21,7 +23,7 @@ class PostController extends Controller {
 			$new_post->save();
 			
 			$url = URL::to("t/".$thread_id);
-			return Response::json(array('status' => 1, 'url' => $url));
+			return Response::json(array('status' => 1, 'url' => $post_body));
 		}
 	}
 }

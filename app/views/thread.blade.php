@@ -93,7 +93,6 @@
 						$( "#msgDiv" ).show('zoom');
 					}
 					else{
-// 						$("body").load(data.url);
 						//clear tinyMCE content as it is posted now
 						tinyMCE.activeEditor.setContent('');
 						location.reload();
