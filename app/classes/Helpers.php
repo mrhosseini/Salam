@@ -9,7 +9,7 @@ class Helpers {
 	/**
 	 * Generates a random persian srting
 	 * @param length The length of output string. 
-	 * 		  @default 0 for random length between 5 to 30
+	 * @default 0 for random length between 5 to 30
 	 * @return a random string with persian characters
 	 */
 	public static function randomPersianString($length = 0){
@@ -50,5 +50,14 @@ class Helpers {
 		else{
 			return $str;
 		}
+	}
+	
+	/**
+	 * replaces incorrect ی and ک and ۶ و ۵و ۴ with correct one
+	 */
+	public static function replaceKafYeh($str){
+		$arabic = array("ي", "ك", "٤", "٥", "٦");
+		$persian = array("ی", "ک", "۴", "۵", "۶");
+		return str_replace($arabic, $persian, $str);
 	}
 }
