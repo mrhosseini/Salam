@@ -5,7 +5,10 @@
  ****************/
 ?>
 @extends('layouts.base')
-
+@section('header_scripts')
+	{{ HTML::script('js/tinymce/tinymce.min.js'); }}
+	{{ HTML::script('js/tinymce.js'); }}
+@stop
 @section('body')
 @include('header', array('profile' => Auth::user()->profile))
 	<div class="container">
@@ -29,10 +32,10 @@
 				</ul>
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-12">
-				<a href="./new" role="button" class="btn btn-success">
+				<button role="button" class="btn btn-success" id="btnNewThread">
 					<span class="glyphicon glyphicon-plus"></span>
 					{{ trans('messages.new_message'); }}
-				</a>
+				</button>
 			</div>
 		</div>
 	</div><!-- /.container -->
@@ -106,7 +109,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row" style="border-top: 2px solid #bdf;">
+		<div class="row" style="border-top: 2px solid #bdf; padding-bottom: 50px;">
 			<div class="col-md-2"></div>
 			<ul class="pager col-md-8">
 				@if ($isLastPage == false)
@@ -122,8 +125,42 @@
 			</ul>
 			<div class="col-md-2"></div>
 		</div>
-		
 	</div><!-- /.container -->
+	
+	<div id="frmNewThread" class="navbar navbar-fixed-bottom" style="background-color: #fff; display:none;">
+		<div class="container" style="background-color:#f3f3f3; box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15); border-radius: 5px;">
+			<div class="row" style="padding:10px;">
+				<div class="row" style="padding:10px;">
+					<div class="col-md-10 col-xs-11"><h3>{{ trans('messages.send_new_message'); }}</h3></div>
+					<div class="col-md-2 col-xs-1 text-left ">
+						<button id="btnCloseNewThreadForm" role="button" class="btn" title="{{ trans('messages.close'); }}">
+							<span  class="glyphicon glyphicon-remove"></span>
+						</button>
+					</div>
+				</div>
+				<div class="row" style="padding:20px;"	>
+					<input type="text" class="form-control col-md-6" placeholder="{{ trans('messages.title'); }}" title="{{ trans('messages.title'); }}">
+					<div class="col-md-2"></div>
+					<label class="col-md-1 text-left control-label" for="category" style="padding-top: 5px;">{{ trans('messages.category'); }}:</label>
+					<select class="form-control col-md-3" name="category" id="category">
+						<option>مجمع</option>
+						<option>عمومی</option>
+						<option>سیاسی</option>
+						<option>زنگ تفریح</option>
+					</select>
+				</div>
+				<textarea></textarea>
+			</div>
+			
+			<div style="padding-top: 10px; padding-bottom: 10px;">
+				<button role="button" class="btn btn-success">
+					<span class="glyphicon glyphicon-send"></span>
+					&nbsp;&nbsp;&nbsp;{{ trans('messages.send'); }}&nbsp;&nbsp;&nbsp;
+				</button>
+			</div>
+			</div>
+		</div><!-- /.container -->
+	</div>
 @stop
 
 @section('scripts')
@@ -133,6 +170,26 @@
 			 * activate the home button on navigation bar
 			 */
 			 $( "#nav-home" ).addClass("active");
+			 
+			 $("#btnCloseNewThreadForm").click(function(){
+				$("#frmNewThread").hide();
+			 });
+			 
+			 $("#btnNewThread").click(function(){
+				$("#frmNewThread").fadeIn('fast');
+			 });
+			 
+			 $(function () {
+				var nua = navigator.userAgent
+				var isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1)
+				if (isAndroid) {
+				$('select.form-control').removeClass('form-control').css('width', '100%')
+				}
+			})
+			
+			$(document).keyup(function(e) {
+				if (e.keyCode == 27) { $('#btnCloseNewThreadForm').click(); }   // esc
+			});
 		});
 	</script>
 @stop

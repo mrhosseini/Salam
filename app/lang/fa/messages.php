@@ -31,6 +31,10 @@ return array(
     'newer_threads' => 'جدیدتر <span class="glyphicon glyphicon-chevron-left" ></span>',
     'older_threads' => '<span class="glyphicon glyphicon-chevron-right" ></span> قدیمی‌تر',
     'send_reply' => 'ارسال پاسخ',
+    'send' => 'ارسال',
+    'send_new_message' => 'ارسال مطلب جدید',
+    'close' => 'بستن',
+    'title' => 'عنوان مطلب',
     
 );
 
