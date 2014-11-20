@@ -1,6 +1,6 @@
 ## Salam Discussion Board
 
-Salam is another discussion board software written in php using [Laravel Framework](http://laravel.com).
+Salam is a social platform for private groups and organizations written in php using [Laravel Framework](http://laravel.com).
 It is mainly focused on Persian language users.
 
 Salam is currently under development and not usable yet.
