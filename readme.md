@@ -1,4 +1,4 @@
-## Salam Discussion Board
+## Salam Social Platform
 
 Salam is a social platform for private groups and organizations written in php using [Laravel Framework](http://laravel.com).
 It is mainly focused on Persian language users.
