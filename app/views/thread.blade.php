@@ -41,6 +41,7 @@
 					<h3 style="padding-bottom: 15px;">{{ $thread->title }}</h3>
 					@foreach ($posts as $post)
 						<div class="row" style="padding-bottom: 30px; margin-left:0px;">
+							<a name="{{ $post->id }}"></a>
 							<div class="row" style="background-color: #f3f3f3; padding-top: 2px; padding-bottom: 2px; margin-left:0px; margin-right:0px; border-top: 1px solid #ddd;">
 								<div class="col-md-1 col-xs-2">
 									<a  href="{{ URL::to('/user/'.$post->user_id) }}">
