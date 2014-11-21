@@ -35,6 +35,7 @@ class ThreadController extends Controller {
 		 * purify title for security and clean up
 		 */
 		$title = Purifier::clean($title);
+		$title = strip_tags($title);
 		
 		/*
 		 * replace ی and ک and
