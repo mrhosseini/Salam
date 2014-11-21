@@ -1,0 +1,27 @@
+/****************
+ * بسم الله الرحمن الرحیم
+ *
+ ****************/
+
+.user-info{
+	border: none;
+	font-size: 1.5em;
+/* 	padding-top: 0.3em; */
+	width: 90%;
+	color: blue;
+	
+}
+
+.user-info-input{
+	font-size: 1.5em;
+/* 	padding-top: 0.3em; */
+	width: 90%;
+	color: blue;
+	display: none;
+}
+
+.info-row{
+	padding-top: 1.5em;
+/* 	border-right: 5px solid black; */
+	padding-right: 10px;
+}

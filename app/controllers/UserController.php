@@ -54,4 +54,13 @@ class UserController extends BaseController {
 			}
 		}
 	}
+	
+	public function showProfile($user_id){
+		$user = User::find($user_id);
+		if ($user)
+			return View::make('profile')->with('user', $user)->with('profile', $user->profile);
+		else{
+			return Redirect::to('/');
+		}
+	}
 }

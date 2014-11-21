@@ -24,7 +24,6 @@ Route::get('login', array('before' => 'guest', function(){
 	return View::make('login');
 }));
 
-
 Route::post('login', array('before' => 'csrf|guest', 'uses' => 'UserController@authenticate'));
 
 Route::get('logout', array('before' => 'auth', function(){
@@ -37,3 +36,9 @@ Route::get('t/{id}', array('before' => 'auth', 'uses' => 'ThreadController@showT
 Route::post('reply', array('before' => 'auth', 'uses' => 'PostController@sendReply'));
 
 Route::post('new', array('before' => 'auth', 'uses' => 'ThreadController@newThread'));
+
+Route::get('user/{id}', array('before' => 'auth', 'uses' => 'UserController@showProfile'))->where('id', '[0-9]+');
+
+Route::get('profile', array('before' => 'auth', function(){
+	return Redirect::to('user/'.Auth::user()->id);
+}));
