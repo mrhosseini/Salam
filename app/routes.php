@@ -35,3 +35,5 @@ Route::get('logout', array('before' => 'auth', function(){
 Route::get('t/{id}', array('before' => 'auth', 'uses' => 'ThreadController@showThreadPosts'))->where('id', '[0-9]+');
 
 Route::post('reply', array('before' => 'auth', 'uses' => 'PostController@sendReply'));
+
+Route::post('new', array('before' => 'auth', 'uses' => 'ThreadController@newThread'));

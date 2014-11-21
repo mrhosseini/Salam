@@ -18,5 +18,37 @@ class ThreadController extends Controller {
 					   ->with('posts', $posts);
 	}
 	
+	public function newThread(){
+		if (Input::has('post') && Input::has('title') && Input::has('category')) {
+			$post_body = Input::get('post');
+			$title = Input::get('title');
+			$category = Input::get('category');
+			$thread_id = $this->createThread($title, $category);
+			$postCtl = new PostController;
+			$postCtl->newPost($thread_id, $post_body);
+			return Response::json(array('status' => 1));
+		}
+	}
+	
+	private function createThread($title, $category){
+		/*
+		 * purify title for security and clean up
+		 */
+		$title = Purifier::clean($title);
+		
+		/*
+		 * replace ی and ک and
+		 */
+		 $title = Helpers::replaceKafYeh($title);
+		
+		/*
+		 * save the Thread.
+		 * TODO: save thread category
+		 */
+		$new_thread = new Thread;
+		$new_thread->title = $title;
+		$new_thread->save();
+		return $new_thread->id;
+	}
 
 }

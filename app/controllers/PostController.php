@@ -21,7 +21,7 @@ class PostController extends Controller {
 	/**
 	 * create a new post under the specified thread
 	 */
-	private function newPost($thread_id, $post_body)
+	public function newPost($thread_id, $post_body)
 	{
 		/*
 		 * purify post_body for security and clean up

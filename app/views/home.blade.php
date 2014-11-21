@@ -138,22 +138,25 @@
 						</button>
 					</div>
 				</div>
+				<div id="msgDiv" class="row text-center" style="padding:10px; display: none;">
+						<span class="alert alert-warning" id="msg"></span>
+				</div>
 				<div class="row" style="padding:20px;"	>
-					<input type="text" class="form-control col-md-6" placeholder="{{ trans('messages.title'); }}" title="{{ trans('messages.title'); }}">
+					<input id="title" type="text" class="form-control col-md-6" placeholder="{{ trans('messages.title'); }}" title="{{ trans('messages.title'); }}">
 					<div class="col-md-2"></div>
 					<label class="col-md-1 text-left control-label" for="category" style="padding-top: 5px;">{{ trans('messages.category'); }}:</label>
 					<select class="form-control col-md-3" name="category" id="category">
-						<option>مجمع</option>
-						<option>عمومی</option>
-						<option>سیاسی</option>
-						<option>زنگ تفریح</option>
+						<option value="1">مجمع</option>
+						<option value="2">عمومی</option>
+						<option value="3">سیاسی</option>
+						<option value="4">زنگ تفریح</option>
 					</select>
 				</div>
 				<textarea></textarea>
 			</div>
 			
 			<div style="padding-top: 10px; padding-bottom: 10px;">
-				<button role="button" class="btn btn-success">
+				<button id="btnSend" role="button" class="btn btn-success">
 					<span class="glyphicon glyphicon-send"></span>
 					&nbsp;&nbsp;&nbsp;{{ trans('messages.send'); }}&nbsp;&nbsp;&nbsp;
 				</button>
@@ -171,14 +174,31 @@
 			 */
 			 $( "#nav-home" ).addClass("active");
 			 
+			 /*
+			  * hide #frmNewThread on #btnCloseNewThreadForm click
+			  */
 			 $("#btnCloseNewThreadForm").click(function(){
-				$("#frmNewThread").hide();
+				$( "#msgDiv" ).hide();
+				$( "#frmNewThread" ).hide();
 			 });
 			 
+			 /*
+			  * show #frmNewThread on #btnNewThread click
+			  */
 			 $("#btnNewThread").click(function(){
 				$("#frmNewThread").fadeIn('fast');
 			 });
-			 
+			
+			/*
+			 * hide #frmNewThread on escape key press
+			 */
+			$(document).keyup(function(e) {
+				if (e.keyCode == 27) { $('#btnCloseNewThreadForm').click(); }   // esc
+			});
+			
+			 /*
+			  * fix for android
+			  */
 			 $(function () {
 				var nua = navigator.userAgent
 				var isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1)
@@ -186,9 +206,44 @@
 				$('select.form-control').removeClass('form-control').css('width', '100%')
 				}
 			})
-			
-			$(document).keyup(function(e) {
-				if (e.keyCode == 27) { $('#btnCloseNewThreadForm').click(); }   // esc
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			$( "#btnSend" ).click(function() {
+				url = '{{ URL::to("new") }}';
+				// get content of tinyMCE editor
+				post = tinyMCE.activeEditor.getContent();
+				title = $("#title").val();
+				category = $("#category").val();
+				if (!title.trim()){
+					$( "#msg" ).html("{{ trans('messages.empty_title'); }}");
+					$( "#msgDiv" ).fadeIn('slow');
+					return;
+				}
+				else if (!post.trim()){
+					$( "#msg" ).html("{{ trans('messages.empty_body'); }}");
+					$( "#msgDiv" ).fadeIn('slow');
+					return;
+				}
+				else {
+					// Send the data using post
+					var posting = $.post( url, {'post': post, 'title': title, 'category': category});
+					// Put the results in a div;
+					posting.done(function(data) {
+						if (data.status == 0){
+							$( "#msg" ).html(data.msg);
+							$( "#msgDiv" ).show('zoom');
+						}
+						else{
+							//clear tinyMCE content as it is posted now
+							tinyMCE.activeEditor.setContent('');
+							//clear title
+							$( "#title" ).val('');
+							location.reload();
+						}
+					});
+				}
 			});
 		});
 	</script>
