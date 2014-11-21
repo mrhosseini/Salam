@@ -23,7 +23,7 @@
 		<div class="row" >
 			<div class="col-xs-12 col-md-9 col-sm-10">
 				<div class="row" style="background-color: #feffff; padding: 10px 10px 10px 10px;">
-					<h3 style="padding-bottom: 15px;">{{ $thread->title }}</h3>
+					<h3 style="padding-bottom: 15px; line-height: 1.5em;">{{ $thread->title }}</h3>
 					@foreach ($posts as $post)
 						<div class="row" style="padding-bottom: 30px; margin-left:0px;">
 							<a name="{{ $post->id }}"></a>
