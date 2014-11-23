@@ -148,37 +148,6 @@ class UserProfileTableSeeder extends Seeder {
 				));
 			}
 		}
-		
-// 		UserProfile::create(array(
-// 			'user_id' => $user->id,
-// 			'firstname' => 'محمد رضا',
-// 			'lastname' => 'حسینی',
-// 			'phone' => '09131944875',
-// 			'degree' => 'دکترا',
-// 			'field' => 'مهندسی کامپیوتر ',
-// 			'university' => 'دانشگاه صنعتی اصفهان',
-// 			'job' => 'برنامه نویس',
-// 			'workplace' => 'مجمع فرهنگی شهید اژه‌ای; اصفهان',
-// 			'live_in' => 'اصفهان',
-// 			'img' => 'avatar.png'
-// 			));
-// 			
-// 		
-// 		for ($i = 2; $i <= 10; $i++){
-// 			UserProfile::create(array(
-// 				'user_id' => $i,
-// 				'firstname' => Helpers::randomPersianString(rand(4,9)),
-// 				'lastname' => Helpers::randomPersianString(rand(4,9)),
-// 				'phone' => '091'.rand(10000000,99999999),
-// 				'degree' => Helpers::randomPersianString(rand(5,10)),
-// 				'field' => Helpers::randomPersianString(rand(7,15)),
-// 				'university' => Helpers::randomPersianString(rand(10,20)),
-// 				'job' => Helpers::randomPersianString(rand(7,15)),
-// 				'workplace' => Helpers::randomPersianString(rand(10,20)),
-// 				'live_in' => Helpers::randomPersianString(rand(3,10)),
-// 				'img' => $i.'.jpg',
-// 			));
-// 		}
 	} 
 }
 
