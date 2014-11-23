@@ -25,12 +25,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 	
 	/**
-	 * Get the user's profile. Each #User has a #UserProfile
+	 * Get the user's profile. Each #User has many #UserProfile
 	 *
 	 * @return the #UserProfile object 
 	 */
 	public function profile(){
-		return $this->hasOne('UserProfile');
+		return $this->hasMany('UserProfile');
 	}
 	
 	
@@ -41,6 +41,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function posts(){
 		return $this->hasMany('Post');
+	}
+	
+	
+	/**
+	 * Many to Many relation ship between #User and #ProfileField with #userprofiles and the pivot table
+	 *
+	 * 
+	 */
+	public function profile_fields(){
+		return $this->belongsToMany('ProfileField', 'userprofiles', 'user_id', 'field_id');
 	}
 	
 	

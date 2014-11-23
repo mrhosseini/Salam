@@ -10,7 +10,7 @@
 	{{ HTML::script('js/tinymce.js'); }}
 @stop
 @section('body')
-@include('header', array('profile' => Auth::user()->profile))
+@include('header', array('user' => Auth::user()))
 	<div class="container">
 		<div class="row" style="padding-bottom: 10px; border-bottom: 2px solid #bdf;">
 			<div class="col-md-10 col-sm-10 col-xs-6">
@@ -73,12 +73,12 @@
 									{{-- @foreach ($author_list[$thread->id] as $author) --}}
 									@for ($i = 0; $i < count($author_list[$thread->id]); $i++)
 										{{-- <a href="{{ URL::to('/user/'.$author->id) }}" 
-										   title="{{{ $author->profile->firstname }}} {{{ $author->profile->lastname }}}">
-											<img src="{{ URL::to(Constants::$profile_pics_path.$author->profile->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
+										   title="{{{ $author->firstname }}} {{{ $author->lastname }}}">
+											<img src="{{ URL::to(Constants::$profile_pics_path . $author->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
 										</a> --}}
 										<a href="{{ URL::to('/user/'.$author_list[$thread->id][$i]->id) }}" 
-										   title="{{{ $author_list[$thread->id][$i]->profile->firstname }}} {{{ $author_list[$thread->id][$i]->profile->lastname }}}">
-											<img src="{{ URL::to(Constants::$profile_pics_path.$author_list[$thread->id][$i]->profile->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
+										   title="{{{ $author_list[$thread->id][$i]->firstname }}} {{{ $author_list[$thread->id][$i]->lastname }}}">
+											<img src="{{ URL::to(Constants::$profile_pics_path . $author_list[$thread->id][$i]->img) }}" alt="" style="width: 25px; border-radius: 3px;" >
 										</a>
 									@endfor
 									{{-- @endforeach --}}

@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('DeleterSeeder');
 		$this->call('UserTableSeeder');
+		$this->call('ProfileFieldTableSeeder');
 		$this->call('UserProfileTableSeeder');
 		$this->call('ThreadTableSeeder');
 		$this->call('PostTableSeeder');
 	}
-
 }
 
 /**
@@ -29,16 +29,17 @@ class DeleterSeeder extends Seeder {
 		DB::table('posts')->delete();
 		DB::table('threads')->delete();
 		DB::table('userprofiles')->delete();
+		DB::table('profilefields')->delete();
 		DB::table('users')->delete();
 	}
-
 }
 
 class UserTableSeeder extends Seeder {
 	
 	public function run(){
 		DB::table('users')->delete();
-		User::create(array('email' => 'mrhosseini1367@gmail.com', 'active' => true, 'root' => true, 'password' => Hash::make('salam')));
+		User::create(array('email' => 'mrhosseini1367@gmail.com', 'active' => true, 'root' => true, 'password' => Hash::make('salam'),
+				'firstname' => 'محمد رضا', 'lastname' => 'حسینی', 'img' => 'avatar.png', 'username' => 'mrhosseini'));
 		
 		
 		for ($i = 0; $i < 9; $i++){
@@ -46,11 +47,32 @@ class UserTableSeeder extends Seeder {
 				'email' => substr(str_shuffle(md5(time())), 0, rand(5 ,10)).'@gmail.com',
 				'active' => true,
 				'root' => false, 
-				'password' => Hash::make('salam')));
+				'password' => Hash::make('salam'),
+				'firstname' => Helpers::randomPersianString(rand(4,9)),
+				'lastname' => Helpers::randomPersianString(rand(4,9)),
+				'username' => substr(str_shuffle(md5(time())), 0, rand(5 ,10)),
+				'img' => ($i+1).'.jpg'
+				));
 		}
 	}
 }
 
+class ProfileFieldTableSeeder extends Seeder {
+	public function run(){
+		DB::table('profilefields')->delete();
+		
+		ProfileField::create(array('name' => 'phone', 'type' => 'string', 'display_name' => 'شماره تماس'));
+		ProfileField::create(array('name' => 'degree', 'type' => 'string', 'display_name' => 'مدرک (مقطع) تحصیلی'));
+		ProfileField::create(array('name' => 'field', 'type' => 'string', 'display_name' => 'رشته تحصیلی'));
+		ProfileField::create(array('name' => 'university', 'type' => 'string', 'display_name' => 'دانشگاه محل تحصیل'));
+		ProfileField::create(array('name' => 'job', 'type' => 'string', 'display_name' => 'شغل'));
+		ProfileField::create(array('name' => 'workplace', 'type' => 'string', 'display_name' => 'محل کار'));
+		ProfileField::create(array('name' => 'live_in', 'type' => 'string', 'display_name' => 'شهر محل سکونت'));
+		ProfileField::create(array('name' => 'married', 'type' => 'boolean', 'display_name' => 'متأهل'));
+		ProfileField::create(array('name' => 'description', 'type' => 'text', 'display_name' => 'سایر توضیحات'));
+		ProfileField::create(array('name' => 'majma_job', 'type' => 'string', 'display_name' => 'مسئولیت فعلی در مجمع'));
+	}
+}
 
 class UserProfileTableSeeder extends Seeder {
 	
@@ -59,34 +81,104 @@ class UserProfileTableSeeder extends Seeder {
 		$user = User::where('email', 'mrhosseini1367@gmail.com')->first();
 		UserProfile::create(array(
 			'user_id' => $user->id,
-			'firstname' => 'محمد رضا',
-			'lastname' => 'حسینی',
-			'phone' => '09131944875',
-			'degree' => 'دکترا',
-			'field' => 'مهندسی کامپیوتر ',
-			'university' => 'دانشگاه صنعتی اصفهان',
-			'job' => 'برنامه نویس',
-			'workplace' => 'مجمع فرهنگی شهید اژه‌ای; اصفهان',
-			'live_in' => 'اصفهان',
-			'img' => 'avatar.png'
-			));
-			
+			'field_id' => 1,
+			'value' => '09131944857',
+		));
 		
-		for ($i = 2; $i <= 10; $i++){
-			UserProfile::create(array(
-				'user_id' => $i,
-				'firstname' => Helpers::randomPersianString(rand(4,9)),
-				'lastname' => Helpers::randomPersianString(rand(4,9)),
-				'phone' => '091'.rand(10000000,99999999),
-				'degree' => Helpers::randomPersianString(rand(5,10)),
-				'field' => Helpers::randomPersianString(rand(7,15)),
-				'university' => Helpers::randomPersianString(rand(10,20)),
-				'job' => Helpers::randomPersianString(rand(7,15)),
-				'workplace' => Helpers::randomPersianString(rand(10,20)),
-				'live_in' => Helpers::randomPersianString(rand(3,10)),
-				'img' => $i.'.jpg',
-			));
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 2,
+			'value' => 'دکترا',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 3,
+			'value' => 'مهندسی کامپیوتر',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 4,
+			'value' => 'دانشگاه صنعتی اصفهان',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 5,
+			'value' => 'برنامه نویس',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 6,
+			'value' => 'مجمع فرهنگی شهید اژه‌ای',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 7,
+			'value' => 'اصفهان',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 8,
+			'value' => false,
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 9,
+			'value' => 'من متعلق به همه شما هستم!',
+		));
+		
+		UserProfile::create(array(
+			'user_id' => $user->id,
+			'field_id' => 10,
+			'value' => 'رئیس گروپ!',
+		));	
+		
+		for ($j = 2; $j < 11; $j++){
+			for ($i = 1; $i < 11; $i++){
+				UserProfile::create(array(
+					'user_id' => $j,
+					'field_id' => $i,
+					'value' => ($i == 8)? rand(0,1) :  Helpers::randomPersianString(rand(7,15)),		
+				));
+			}
 		}
+		
+// 		UserProfile::create(array(
+// 			'user_id' => $user->id,
+// 			'firstname' => 'محمد رضا',
+// 			'lastname' => 'حسینی',
+// 			'phone' => '09131944875',
+// 			'degree' => 'دکترا',
+// 			'field' => 'مهندسی کامپیوتر ',
+// 			'university' => 'دانشگاه صنعتی اصفهان',
+// 			'job' => 'برنامه نویس',
+// 			'workplace' => 'مجمع فرهنگی شهید اژه‌ای; اصفهان',
+// 			'live_in' => 'اصفهان',
+// 			'img' => 'avatar.png'
+// 			));
+// 			
+// 		
+// 		for ($i = 2; $i <= 10; $i++){
+// 			UserProfile::create(array(
+// 				'user_id' => $i,
+// 				'firstname' => Helpers::randomPersianString(rand(4,9)),
+// 				'lastname' => Helpers::randomPersianString(rand(4,9)),
+// 				'phone' => '091'.rand(10000000,99999999),
+// 				'degree' => Helpers::randomPersianString(rand(5,10)),
+// 				'field' => Helpers::randomPersianString(rand(7,15)),
+// 				'university' => Helpers::randomPersianString(rand(10,20)),
+// 				'job' => Helpers::randomPersianString(rand(7,15)),
+// 				'workplace' => Helpers::randomPersianString(rand(10,20)),
+// 				'live_in' => Helpers::randomPersianString(rand(3,10)),
+// 				'img' => $i.'.jpg',
+// 			));
+// 		}
 	} 
 }
 

@@ -18,7 +18,7 @@
 @stop
 
 @section('body')
-@include('header', array('profile' => Auth::user()->profile))
+@include('header', array('user' => Auth::user()))
 	<div class="container">
 		<div class="row" >
 			<div class="col-xs-12 col-md-9 col-sm-10">
@@ -30,12 +30,12 @@
 							<div class="row" style="background-color: #f3f3f3; padding-top: 2px; padding-bottom: 2px; margin-left:0px; margin-right:0px; border-top: 1px solid #ddd;">
 								<div class="col-md-1 col-xs-2">
 									<a  href="{{ URL::to('/user/'.$post->user_id) }}">
-										<img src="{{ URL::to(Constants::$profile_pics_path.$post->user->profile->img) }}" style="width: 45px;" class="img-thumbnail">
+										<img src="{{ URL::to(Constants::$profile_pics_path . $post->user->img) }}" style="width: 45px;" class="img-thumbnail">
 									</a>
 								</div>
 								<div class="col-md-9 col-xs-7" style="padding-top: 10px; font-family: serif; font-weight: bold;">
-									{{ $post->user->profile->firstname }}
-									{{ $post->user->profile->lastname }}
+									{{ $post->user->firstname }}
+									{{ $post->user->lastname }}
 								</div>
 								<div class="col-md-2 col-xs-3" style="text-align: left; padding-top: 10px; color: #333;">
 									<span class="glyphicon glyphicon-time"></span>

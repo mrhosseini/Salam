@@ -8,9 +8,9 @@
 
 ?>
 
-{{-- Pass a UserProfile object as input to this template                     --}}
-{{-- @input profile  a UserProfle object containing current user profile     --}}
-{{-- example: @include('header', array('profile' => Auth::user()->profile )) --}}
+{{-- Pass a User object as input to this template                     --}}
+{{-- @input user  a User object containing current user information     --}}
+{{-- example: @include('header', array('user' => Auth::user() )) --}}
 
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
@@ -31,9 +31,9 @@
 					<li id="nav-home"><a href="{{ URL::to('/') }}">{{ trans('messages.home'); }}</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{{ URL::to(Constants::$profile_pics_path.$profile->img) }}" alt="{{ $profile->firstname }} {{ $profile->lastname }}" class="img-circle" style="width: 18px;">
+							<img src="{{ URL::to(Constants::$profile_pics_path . $user->img) }}" alt="{{ $user->firstname }} {{ $user->lastname }}" class="img-circle" style="width: 18px;">
 							&nbsp;
-							{{ $profile->firstname }}&nbsp;{{ $profile->lastname }}
+							{{ $user->firstname }}&nbsp;{{ $user->lastname }}
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu" style="left: 0;">

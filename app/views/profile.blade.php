@@ -13,16 +13,16 @@
 @section('title')
 {{ trans('messages.salam') }}
 |
-{{{ $profile->firstname }}} {{{ $profile->lastname }}}
+{{{ $user->firstname }}} {{{ $user->lastname }}}
 @stop
 
 @section('body')
-@include('header', array('profile' => Auth::user()->profile))
+@include('header', array('user' => Auth::user()))
 	<div class="container">
 		<div class="row info-row" >
 			<div class="col-md-3 col-sm-4 col-xs-6">
 				<a href="" class="thumbnail">
-					<img src="{{ URL::to(Constants::$profile_pics_path.$profile->img) }}" alt="{{{ $profile->firstname }}} {{{ $profile->lastname }}}">
+					<img src="{{ URL::to(Constants::$profile_pics_path . $user->img) }}" alt="{{{ $user->firstname }}} {{{ $user->lastname }}}">
 				</a>
 			</div>
 			@if (Auth::user()->id == $user->id)
@@ -36,8 +36,8 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<p class="user-info">{{{ $profile->firstname }}}</p>
-						<input class="user-info-input form-control input-lg" type="text" value="{{{ $profile->firstname }}}">
+						<p class="user-info">{{{ $user->firstname }}}</p>
+						<input class="user-info-input form-control input-lg" type="text" value="{{{ $user->firstname }}}">
 					</div>
 				</div>
 			</div>
@@ -47,8 +47,8 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<p class="user-info">{{{ $profile->lastname }}}</p>
-						<input class="user-info-input form-control input-lg" type="text" value="{{{ $profile->lastname }}}">
+						<p class="user-info">{{{ $user->lastname }}}</p>
+						<input class="user-info-input form-control input-lg" type="text" value="{{{ $user->lastname }}}">
 					</div>
 				</div>
 			</div>
@@ -71,13 +71,13 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<p class="user-info"></p>
-						<input class="user-info-input form-control input-lg" type="text" value="">
+						<p class="user-info">{{{ $user->username }}}</p>
+						<input class="user-info-input form-control input-lg" type="text" value="{{{ $user->username }}}">
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row info-row">
+		{{-- <div class="row info-row">
 			<div class="col-md-6 col-sm-6">
 				<div class="row">
 					<div class="col-xs-12"><lable class="control-label">{{ trans('messages.phone') }}</label></div>
@@ -194,7 +194,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 	</div><!-- /.container -->
 @stop
 
