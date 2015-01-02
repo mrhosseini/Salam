@@ -40,18 +40,12 @@ return array(
     'edit' => 'ویرایش',
     'firstname' => 'نام',
     'lastname' => 'نام خانوادگی',
-    'phone' => 'شماره تماس',
-    'job' => 'شغل',
-    'workplace' => 'محل کار',
-    'degree' => 'مدرک (مقطع) تحصیلی',
-    'university' => 'دانشگاه محل تحصیل',
     'email2' => 'پست الکترونیکی',
-    'username' => 'نام کاربری',
-    'field_study' => 'رشته تحصیلی',
-    'description' => 'سایر توضیحات',
-    'live_in' => 'شهر محل سکونت',
-    'married' => 'وضعیت تأهل',
-    
-    
+    'username' => 'نام کاربری', 
+    'cancel' => 'انصراف',
+    'save' => 'ذخیره',
+    'change_password' => 'تغییر رمز عبور',
+    'user_info' => 'اطلاعات کاربر',
+    'other_info' => 'سایر مشخصات',
 );
 

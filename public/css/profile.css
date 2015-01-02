@@ -5,23 +5,37 @@
 
 .user-info{
 	border: none;
-	font-size: 1.5em;
+/* 	font-size: 1.5em; */
 /* 	padding-top: 0.3em; */
 	width: 90%;
-	color: blue;
-	
+	color: #222;
+	margin-bottom: 0px;;
 }
 
 .user-info-input{
-	font-size: 1.5em;
+/* 	font-size: 1.5em; */
 /* 	padding-top: 0.3em; */
 	width: 90%;
-	color: blue;
 	display: none;
 }
 
 .info-row{
-	padding-top: 1.5em;
+/* 	padding-top: 1.5em; */
 /* 	border-right: 5px solid black; */
-	padding-right: 10px;
+	padding-right: 0.9em;
+}
+
+.row {
+	padding-bottom: 0.6em;
+	padding-top: 0.6em;
+/* 	border-bottom: solid 1px #ddd; */
+}
+
+.btn {
+	margin-bottom: 0.5em;
+	max-width: 180px;
+}
+
+.pcontent {
+	color: #444;
 }

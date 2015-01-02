@@ -50,7 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * 
 	 */
 	public function profile_fields(){
-		return $this->belongsToMany('ProfileField', 'userprofiles', 'user_id', 'field_id');
+		return $this->belongsToMany('ProfileField', 'userprofiles', 'user_id', 'field_id')->withPivot('value');
 	}
 	
 	
