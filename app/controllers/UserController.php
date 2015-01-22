@@ -65,4 +65,62 @@ class UserController extends BaseController {
 			return Redirect::to('/');
 		}
 	}
+	
+	public function editUser($user_id) {
+		$input = Input::all();
+		
+		$email = trans('messages.email2');
+		$firstname = trans('messages.firstname');
+		$lastname = trans('messages.lastname');
+		$password = trans('messages.password');
+		
+		$validator = Validator::make(
+			array(
+				$email => Input::get('email'),
+				$lastname => Input::get('lastname'),
+				$firstname => Input::get('firstname'),
+				$password => Input::get('password'),
+				
+			),
+			array(
+				$email => 'required|email',
+				$firstname => 'required',
+				$lastname => 'required',
+				$password => 'required',
+			)
+		);
+		
+		if ($validator->fails()){
+			$messages = $validator->messages();
+			$msg = '';
+			foreach ($messages->all('<li>:message</li>') as $message){
+				$msg.=$message;
+			}
+			return Response::json(array('status' => 0, 'msg' => $msg));
+		}
+		
+		if (Auth::user()->id != $user_id) { /** @todo what if root wants to change sth? */
+			return Response::json(array('status' => 0));
+		}
+		
+		if (!Auth::attempt(array('email' => Auth::user()->email, 'password' =>  $input['password'], 'active' => true))){
+			$msg = '<li>'.trans('messages.incorrect_password').'</li>';
+			return Response::json(array('status' => 0, 'msg' => $msg));
+		}
+		
+		$user = User::find($user_id);
+		$user->firstname = $input['firstname'];
+		$user->lastname = $input['lastname'];
+		$user->email = $input['email'];
+		$user->save();
+		
+		$keys = array_keys($input);
+		foreach ($keys as $key) {
+			if (!is_numeric($key))
+				continue;
+			$user->profile_fields()->updateExistingPivot($key, array('value' => $input[$key]), true);
+		}
+		
+		return Response::json(array('status' => 1));
+	}
 }

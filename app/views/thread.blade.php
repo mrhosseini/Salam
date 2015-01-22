@@ -77,6 +77,7 @@
 					if (data.status == 0){
 						$( "#msg" ).html(data.msg);
 						$( "#msgDiv" ).show('zoom');
+						/// @todo where is msgDiv?
 					}
 					else{
 						//clear tinyMCE content as it is posted now

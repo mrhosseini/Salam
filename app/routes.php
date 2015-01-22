@@ -39,6 +39,8 @@ Route::post('new', array('before' => 'auth', 'uses' => 'ThreadController@newThre
 
 Route::get('user/{id}', array('before' => 'auth', 'uses' => 'UserController@showProfile'))->where('id', '[0-9]+');
 
+Route::post('user/{id}/edit', array('before' => 'csrf|auth', 'as' => 'editUser', 'uses' => 'UserController@editUser'))->where('id', '[0-9]+');
+
 Route::get('profile', array('before' => 'auth', function(){
 	return Redirect::to('user/'.Auth::user()->id);
 }));

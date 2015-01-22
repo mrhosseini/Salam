@@ -47,5 +47,7 @@ return array(
     'change_password' => 'تغییر رمز عبور',
     'user_info' => 'اطلاعات کاربر',
     'other_info' => 'سایر مشخصات',
+    'authentication' => 'احراز اصالت',
+    'ok' => 'تأیید',
 );
 
