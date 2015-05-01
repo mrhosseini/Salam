@@ -9,7 +9,7 @@
 /* 	padding-top: 0.3em; */
 	width: 90%;
 	color: #222;
-	margin-bottom: 0px;;
+	margin-bottom: 0px;
 }
 
 .user-info-input{
@@ -38,4 +38,88 @@
 
 .pcontent {
 	color: #444;
+}
+
+
+a.hovertext { 
+	position: relative;
+	text-decoration: none !important;
+	text-align: center; 
+	cursor: pointer;
+}
+
+a.hovertext:after { 
+	content: attr(data-title); 
+	position: absolute; 
+	left: 0; 
+	bottom: 0; 
+	padding: 0.5em 20px; 
+	width: 100%;
+	background: rgba(0,0,0,0.8); 
+	text-decoration: none !important; 
+	color: #fff; opacity: 0; 
+	-webkit-transition: 0.5s; 
+	-moz-transition: 0.5s; 
+	-o-transition: 0.5s; 
+	-ms-transition: 0.5s;
+}
+a.hovertext:hover:after, a.hovertext:focus:after {
+	opacity: 1.0;	
+} 
+
+
+/*
+ * If the slider or anything else is covered by the background image,
+ * use relative or absolute position on it
+ */
+input.cropit-image-zoom-input {
+	position: relative;
+}
+/* Show load indicator when image is being loaded */
+.cropit-image-preview.cropit-image-loading .spinner {
+	opacity: 1;
+}
+
+/* Show move cursor when image has been loaded */
+.cropit-image-preview.cropit-image-loaded {
+	cursor: move;
+}
+
+/* Gray out zoom slider when the image cannot be zoomed */
+.cropit-image-zoom-input[disabled] {
+	opacity: .2;
+}
+
+/* Hide default file input button if you want to use a custom button */
+input.cropit-image-input {
+	visibility: hidden;
+}
+
+/* The following styles are only relevant to when background image is enabled */
+
+/* Translucent background image */
+.cropit-image-background {
+	opacity: .1;
+}
+
+/* Style the background image differently when preview area is hovered */
+.cropit-image-background.cropit-preview-hovered {
+	opacity: .2;
+}
+
+/*
+ * If the slider or anything else is covered by the background image,
+ * use non-static position on it
+ */
+input.cropit-image-zoom-input {
+	position: relative;
+}
+
+/* Limit the background image by adding overflow: hidden */
+#image-cropper {
+	overflow: hidden;
+	direction: ltr;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }

@@ -49,5 +49,7 @@ return array(
     'other_info' => 'سایر مشخصات',
     'authentication' => 'احراز اصالت',
     'ok' => 'تأیید',
+    'click2change' => 'برای تغییر کلیک کنید',
+    'change_or_edit_profile_pic' => 'انتخاب و ویرایش تصویر',
 );
 

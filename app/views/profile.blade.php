@@ -31,7 +31,11 @@
 		<div class="row info-row pcontent">
 			<div class="col-md-3 col-sm-4 col-xs-12">
 				<div class="row">
+					@if (Auth::user()->id == $user->id)
+					<a id="profilePic" class="hovertext thumbnail" data-title="{{ trans('messages.click2change') }}" style="width: 200px; height: 200px;">
+					@else
 					<a href="" class="thumbnail" style="max-width: 200px;">
+					@endif
 						<img src="{{ URL::to(Constants::$profile_pics_path . $user->img) }}" 
 							alt="{{{ $user->firstname }}} {{{ $user->lastname }}}"
 						>
@@ -46,27 +50,27 @@
 					@endif
 				</div>
 			</div>
-			<div class="col-md-6 col-sm-6">
+			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div class="row">
 					<strong>{{ trans('messages.user_info') }}</strong>
 				</div>
 				<div class="row">
-					<div class="col-md-4 col-sm-4 col-xs-6"><lable class="control-label">{{ trans('messages.firstname') }}:</label></div>
-					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="col-md-4 col-sm-4 col-xs-12"><lable class="control-label">{{ trans('messages.firstname') }}:</label></div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<p class="user-info">{{{ $user->firstname }}}</p>
 						<input id="txtFirstname" class="user-info-input form-control" type="text" value="{{{ $user->firstname }}}">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4 col-sm-4 col-xs-6"><lable class="control-label">{{ trans('messages.lastname') }}:</label></div>
-					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="col-md-4 col-sm-4 col-xs-12"><lable class="control-label">{{ trans('messages.lastname') }}:</label></div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<p class="user-info">{{{ $user->lastname }}}</p>
 						<input id="txtLastname" class="user-info-input form-control" type="text" value="{{{ $user->lastname }}}">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4 col-sm-4 col-xs-6"><lable class="control-label">{{ trans('messages.email2') }}:</label></div>
-					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="col-md-4 col-sm-4 col-xs-12"><lable class="control-label">{{ trans('messages.email2') }}:</label></div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<p class="user-info"><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></p>
 						<input id="txtEmail" class="user-info-input form-control" type="text" value="{{{ $user->email }}}">
 					</div>
@@ -80,8 +84,8 @@
 				<div id="otherInfo">
 				@foreach ($profile_fields as $pf)
 					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-6"><lable class="control-label">{{{ $pf['display_name'] }}}:</label></div>
-						<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="col-md-4 col-sm-4 col-xs-12"><lable class="control-label">{{{ $pf['display_name'] }}}:</label></div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
 						@if ($pf['type'] == 'boolean')
 							@if ($pf['pivot']['value'] == true)
 								<span class="glyphicon glyphicon-ok user-info"></span>
@@ -118,7 +122,6 @@
 							<label for="txtPwdcheck" class="control-label">{{ trans('messages.password') }}</label>
 							<input type="password" class="form-control" id="txtPwdcheck" value="" dir="ltr">
 							<input type="hidden" name="_token" id="_token" value="{{  csrf_token(); }}"/>
-<!-- 							<input type="hidden" name="email" id="pwdEmail" value="{{ Auth::user()->email }}"/>-->
 						</div>
 					</form>
 				</div>
@@ -129,10 +132,48 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="profilePicModal" tabindex="-1" role="dialog" aria-labelledby="profilePicModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="profilePicModalLabel">{{ trans('messages.change_or_edit_profile_pic') }}</h4>
+				</div>
+				<div class="modal-body">
+					<div id="image-cropper">
+						<!-- Cropper preview with background image -->
+						<!-- Preview container is relative positioned -->
+						<!-- Add a wrapper if you need to absolute position it -->
+						<div class="cropit-image-preview-container">
+							<!-- Background image container is absolute positioned -->
+<!--  							<div class="cropit-image-background-container">  -->
+								<!-- Background image is absolute positioned -->
+<!-- 								<img class="cropit-image-background" src="http://scottcheng.github.io/cropit/images/3-960.jpg"/> -->
+<!-- 							</div> -->
+							<div class="cropit-image-preview"></div>
+						</div>
+
+						<!-- Zoom slider -->
+						<input type="range" class="cropit-image-zoom-input" />
+
+						<!-- File selector -->
+						<!-- cropit will add accept="image/*" attribute to it -->
+						<input type="file" class="cropit-image-input" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div style="display:inline;"><button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('messages.cancel') }}</button></div>
+					<div style="display:inline;"><button id="btnProfilePicModalOk" type="button" class="btn btn-primary">{{ trans('messages.ok') }}</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
 @stop
 
 @section('scripts')
 	@if (Auth::user()->id == $user->id)
+	{{ HTML::script('js/jquery.cropit.min.js'); }}
 	<script>
 		$(document).ready(function(){
 			/*
@@ -195,11 +236,6 @@
 					}
 				});
 				
-				/// @todo : password check
-// 				var r = checkPassword();
-// 				alert(r);
-// 				return;
-				
 				var posting = $.post(url, postData);
 				// Put the results in a div;
 				posting.done(function(data) {
@@ -221,6 +257,19 @@
 				alert('salam');
 				return false;
 			});
+			
+			/*
+			 * show profile pic channging modal on click
+			 */
+			$( "#profilePic" ).click(function() {
+				
+				$('#profilePicModal').modal('show');
+			});
+			 
+			$('#image-cropper').cropit({imageBackground : true});
+			$('#image-cropper').cropit('imageSrc', '{{ URL::to(Constants::$profile_pics_path . $user->img) }}');
+			$('#image-cropper').cropit('previewSize', { width: 200, height: 200 });
+
 		});
 	</script>
 	@endif
